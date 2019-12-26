@@ -2,33 +2,76 @@
   "name": "my-server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/index.ts",
   "scripts": {
     "build": "babel src -d dist --source-maps",
-    "serve": "NODE_ENV=production node dist/index.js",
-    "start": "NODE_ENV=development babel-node src/index.js",
-    "dev": "DEBUG=server:debug NODE_ENV=development nodemon src/index.js --exec babel-node",
-    "test": "DEBUG=server:debug NODE_ENV=test mocha --require babel-core/register --reporter spec --exit   tests/ --exec babel-node",
-    "test:watch": "DEBUG=server:debug NODE_ENV=development mocha  --require babel-core/register --watch --reporter  spec   tests/ --exec babel-node",
+    "serve": "NODE_ENV=production node dist/index.ts",
+    "start": "NODE_ENV=development @babel/node src/index.ts",
+    "dev": "DEBUG=server:debug NODE_ENV=development nodemon src/index.ts --exec @babel/node",
+    "test": "DEBUG=server:debug NODE_ENV=test mocha test/**/*.ts --require ts-node/register --reporter spec --exit --exec @babel/node --extensions '.ts'",
+    "test:watch": "DEBUG=server:debug NODE_ENV=development mocha  --require @babel/register --watch --reporter  spec   test/ --exec @babel/node",
     "eslint": "eslint src/**/*.js --ignore-pattern \"node_modules/\""
   },
   "keywords": [],
-  "author": "",
-  "license": "ISC",
+  "author": "ThienSon Ho",
+  "license": "MIT",
   "dependencies": {
-    "babel-cli": "^6.26.0",
-    "babel-preset-node8": "^1.2.0",
+    "@types/mongoose": "^5.5.35",
+    "bcryptjs": "^2.4.3",
+    "braces": "^3.0.2",
+    "express": "^4.17.1",
+    "mongoose": "^5.8.2"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.7.7",
+    "@babel/node": "^7.7.7",
+    "@babel/preset-typescript": "^7.7.7",
+    "@babel/register": "^7.7.7",
+    "@types/chai": "^4.2.7",
+    "@types/config": "0.0.36",
+    "@types/expect": "^24.3.0",
+    "@types/express": "^4.17.2",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.12.21",
+    "@types/supertest": "^2.0.8",
     "chai": "^4.2.0",
     "config": "^3.2.4",
     "debug": "^4.1.1",
-    "express": "^4.17.1",
     "mocha": "^6.2.2",
-    "mongoose": "^5.8.2",
     "nodemon": "^2.0.2",
-    "supertest": "^4.0.2"
-  },
-  "devDependencies": {
+    "supertest": "^4.0.2",
+    "ts-mocha": "^6.0.0",
+    "ts-node": "^8.5.4",
     "tslint": "^5.20.1",
     "typescript": "^3.7.4"
+  },
+  "babel": {
+    "presets": [
+      "node8"
+    ]
+  },
+  "engines": {
+    "node": ">=8"
+  },
+  "eslintConfig": {
+    "plugins": [
+      "node"
+    ],
+    "extends": [
+      "eslint:recommended",
+      "plugin:node/recommended"
+    ],
+    "rules": {
+      "node/no-unsupported-features/es-syntax": 0,
+      "node/no-unsupported-features/es-builtins": 0
+    },
+    "env": {
+      "node": true,
+      "es6": true
+    },
+    "parserOptions": {
+      "sourceType": "module",
+      "ecmaVersion": 2018
+    }
   }
 }
