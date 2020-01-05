@@ -70,4 +70,4 @@ userSchema.methods.verifyPassword = function (password: string) {
     return this.hash === hash;
 }
 
-const User = module.exports = mongoose.model<UserDocument>('User', userSchema);
+export const User = module.exports = mongoose.model<UserDocument>('User', userSchema);
