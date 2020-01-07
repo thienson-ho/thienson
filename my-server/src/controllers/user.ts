@@ -1,5 +1,5 @@
 import express from 'express';
-import { User } from '../models/User';
+const { User } = require('../models/user.model');
 export const router = express.Router();
 
 router.get('/users', async(req, res) => {
@@ -10,4 +10,5 @@ router.get('/users', async(req, res) => {
         res.status(500).send({ message: 'Internal server error' });
     }
 });
+
 

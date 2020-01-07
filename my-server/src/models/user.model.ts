@@ -6,18 +6,18 @@ export type UserDocument = mongoose.Document & {
     email: string;
     password: string;
     salt: string;
-    passwordResetToken: string;
-    passwordResetExpires: Date;
-
-    facebook: string;
-    tokens: AuthToken[];
-
-    profile: {
-        name: string;
-        gender: string;
-        location: string;
-        birthday: Date;
-    };
+    // passwordResetToken: string;
+    // passwordResetExpires: Date;
+    //
+    // facebook: string;
+    // tokens: AuthToken[];
+    //
+    // profile: {
+    //     name: string;
+    //     gender: string;
+    //     location: string;
+    //     birthday: Date;
+    // };
 
 };
 
@@ -32,19 +32,19 @@ const userSchema = new mongoose.Schema({
     email: { type: String, unique: true, required: true },
     password: String,
     salt: String,
-    passwordResetToken: String,
-    passwordResetExpires: Date,
-
-    facebook: String,
-    google: String,
-    tokens: Array,
-
-    profile: {
-        name: String,
-        gender: String,
-        location: String,
-        birthday: Date
-    }
+    // passwordResetToken: String,
+    // passwordResetExpires: Date,
+    //
+    // facebook: String,
+    // google: String,
+    // tokens: Array,
+    //
+    // profile: {
+    //     name: String,
+    //     gender: String,
+    //     location: String,
+    //     birthday: Date
+    // }
 }, { timestamps: true });
 
 userSchema.pre("save", function save(next) {
@@ -58,7 +58,7 @@ userSchema.pre("save", function save(next) {
         user.password = derivedKey.toString('hex');
         user.salt = salt;
     });
-})
+});
 
 userSchema.methods.setPassword = function (password: string) {
     this.salt = crypto.randomBytes(128).toString('base64');
@@ -68,6 +68,6 @@ userSchema.methods.setPassword = function (password: string) {
 userSchema.methods.verifyPassword = function (password: string) {
     var hash = pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
     return this.hash === hash;
-}
+};
 
-export const User = module.exports = mongoose.model<UserDocument>('User', userSchema);
+export const User = mongoose.model('User', userSchema);

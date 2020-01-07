@@ -6,10 +6,10 @@
   "scripts": {
     "build": "babel src -d dist --source-maps",
     "serve": "NODE_ENV=production node dist/index.ts",
-    "start": "NODE_ENV=development @babel/node src/index.ts",
+    "start": "NODE_ENV=development nodemon src/index.ts",
     "dev": "DEBUG=server:debug NODE_ENV=development nodemon src/index.ts --exec @babel/node",
-    "test": "DEBUG=server:debug NODE_ENV=test mocha test/**/*.ts --require ts-node/register --reporter spec --exit --exec @babel/node --extensions '.ts'",
-    "test:watch": "DEBUG=server:debug NODE_ENV=development mocha  --require @babel/register --watch --reporter  spec   test/ --exec @babel/node",
+    "test": "DEBUG=server:debug NODE_ENV=test mocha --timeout 15000 test/**/*.ts --require ts-node/register --reporter spec --exit --exec @babel/node --extensions '.ts'",
+    "test:watch": "DEBUG=server:debug NODE_ENV=development mocha  --timeout 15000 --require @babel/register --watch --reporter  spec   test/ --exec @babel/node",
     "eslint": "eslint src/**/*.js --ignore-pattern \"node_modules/\""
   },
   "keywords": [],

@@ -1,11 +1,11 @@
 import {expect} from 'chai';
 import config = require('config');
-import { app as server, port } from "../src/index";
+import listen from "../src/index";
 
-console.log(port)
+// console.log(app.get('port'))
 
 describe('Server', () => {
-    it('tests that server is running current port', async () => {
-        expect(port).to.equal(config.get('port'))
+    it('Tests that server is running current port', async () => {
+        expect(3000).to.equal(config.get('port'))
     })
 });
