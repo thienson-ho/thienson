@@ -1,15 +1,25 @@
 import config from 'config';
-import express from 'express';
+import express, { Application } from 'express';
 const mongoose = require('mongoose');
 
 const debug = require('debug')('server:debug');
-const app = express();
+const app: Application = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 // export const port = config.get('port');
 
+//Routers
+let router = express.Router();
+router.get('/', (req, res) => {
+    res.json('Sample text');
+});
+const userRouter = require('./routes/user.route');
+
+app.use('/', router);
+app.use('/api/users', userRouter);
+
 mongoose
-    .connect('mongodb://localhost/27017', {
+    .connect('mongodb://localhost:27017/thienson', {
         useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true
