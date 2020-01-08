@@ -7,7 +7,7 @@ const SERVER_URL = 'http://localhost:3000';
 
 describe('User API tests', () => {
     beforeEach(async () => {
-        await User.deleteMany({}, (error: String) => console.log(error));
+        await User.deleteMany({});
     });
 
     it('GET /api/users/ returns an array of users', async () => {
