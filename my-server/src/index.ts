@@ -19,7 +19,7 @@ app.use('/', router);
 app.use('/api/users', userRouter);
 
 mongoose
-    .connect('mongodb://localhost:27017/thienson', {
+    .connect('mongodb://localhost:27017/27017', {
         useNewUrlParser: true,
         useCreateIndex: true,
         useUnifiedTopology: true
@@ -32,12 +32,12 @@ mongoose
         process.exit();
     });
 
-export const listen = app.listen(config.get('port'),() => {
+const server = app.listen(config.get('port'),() => {
     debug(`server is running on port ${config.get('port')} and in ${config.get('name')} mode`);
     console.log(`server is running on port ${config.get('port')} and in ${config.get('name')} mode`);
 });
 
 
-export default app;
+export default app
 // module.exports = app;
 // module.exports.port=config.get('port');
